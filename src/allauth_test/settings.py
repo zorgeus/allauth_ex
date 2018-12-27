@@ -23,12 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG')
+DEBUG = True
+# DEBUG = os.getenv('DJANGO_DEBUG')
 
-if DEBUG:
-    allowed_hosts = []
-else:
-    allowed_hosts = os.getenv('DJANGO_ALLOWED_HOSTS').split(':')
+# if DEBUG:
+    # allowed_hosts = []
+# else:
+    # allowed_hosts = os.getenv('DJANGO_ALLOWED_HOSTS').split(':')
 
 # Application definition
 
@@ -131,10 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 # path to dir where all projects static files are stored
-static_path = os.getenv('DJANGO_TATIC', os.path.join(BASE_DIR, 'remote_static'))
+static_path = os.getenv('DJANGO_STATIC', os.path.join(BASE_DIR, 'remote_static'))
 
 # path to dir where all projects media files are stored
-media_path = os.getenv('DJANGO_EDIA', os.path.join(BASE_DIR, 'remote_media'))
+media_path = os.getenv('DJANGO_MEDIA', os.path.join(BASE_DIR, 'remote_media'))
 
 # name of the directory for this particular site
 project_dir_name = 'all_auth_example'
@@ -145,4 +146,4 @@ STATIC_ROOT = os.path.join(static_path, project_dir_name)
 media_url = '/media/'
 MEDIA_ROOT = os.path.join(media_path, project_dir_name)
 FILE_UPLOAD_PERMISSIONS = 0o644
-print(STATIC_ROOT, MEDIA_ROOT)
+
