@@ -2,7 +2,10 @@ version: '3.5'
 
 services:
   web:
-    build: ./src
+    build:
+      context: ./src
+      args:
+        - INSTALL_PACKAGES
     environment:
       - DJANGO_TIMEZONE=$DJANGO_TIMEZONE
       - DJANGO_DEBUG=$DJANGO_DEBUG

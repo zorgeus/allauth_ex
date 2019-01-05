@@ -1,6 +1,9 @@
 # pull official base image
 FROM python:3.5-alpine
 
+# setting building arguments
+ARG INSTALL_PACKAGES
+
 # set environment varibles
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -13,8 +16,9 @@ RUN pip install --upgrade pip
 RUN pip install pipenv
 COPY ./Pipfile /usr/src/app/Pipfile
 RUN pipenv lock
-#COPY ./Pipfile.lock /usr/src/app/Pipfile.lock
-RUN pipenv install --system --deploy
+
+# installing all packages and dependencies
+RUN $INSTALL_PACKAGES
 
 # copy project
 COPY . /usr/src/app/
