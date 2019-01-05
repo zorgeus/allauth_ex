@@ -20,8 +20,18 @@ services:
     volumes:
       - ./src/:/usr/src/app/
       - static_volume:/usr/src/app/staticfiles
+    expose:
+      - 8000
+  nginx:
+    build: ./nginx
     ports:
-      - 8000:8000
+      - 80:80
+    depends_on:
+      - web
+    volumes:
+      - static_volume:/usr/src/app/staticfiles
+
+
 
 volumes:
   static_volume:
