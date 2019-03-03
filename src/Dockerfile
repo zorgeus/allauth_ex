@@ -7,6 +7,8 @@ ARG INSTALL_PACKAGES
 # set environment varibles
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV DJANGO_STATIC /usr/src/app/staticfiles
+ENV DJANGO_MEDIA /usr/src/app/mediafiles
 
 # set work directory
 WORKDIR /usr/src/app
@@ -21,11 +23,11 @@ RUN pipenv lock
 RUN $INSTALL_PACKAGES
 
 # copy project
-COPY . /usr/src/app/
+#COPY . /usr/src/app/
 
 # Defining a healthcheck to curl the home page of Django app.
 HEALTHCHECK --interval=1m --timeout=10s CMD curl -f http://localhost:8000 || exit 1
 
-# Run Gunicorn server to serve the project
-CMD gunicorn allauth_test.wsgi:application --bind 0.0.0.0:8000
+# Run entrypoint.sh
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 

@@ -1,25 +1,27 @@
 version: '3.5'
 
+volumes:
+  allauth_static_volume:
+
 services:
   web:
     build:
       context: ./src
       args:
         - INSTALL_PACKAGES
+    command: gunicorn allauth_test.wsgi:application --bind 0.0.0.0:8000
     environment:
       - DJANGO_TIMEZONE=$DJANGO_TIMEZONE
       - DJANGO_DEBUG=$DJANGO_DEBUG
       - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
       - DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS
-      - DJANGO_STATIC=$DJANGO_STATIC
-      - DJANGO_MEDIA=$DJANGO_MEDIA
       - MYSQL_PORT=$MYSQL_PORT
       - MYSQL_USER=$MYSQL_USER
       - MYSQL_NAME=$MYSQL_NAME
       - MYSQL_PWD=$MYSQL_PWD
     volumes:
       - ./src/:/usr/src/app/
-      - static_volume:/usr/src/app/staticfiles
+      - allauth_static_volume:/usr/src/app/staticfiles/
     expose:
       - 8000
   nginx:
@@ -29,9 +31,5 @@ services:
     depends_on:
       - web
     volumes:
-      - static_volume:/usr/src/app/staticfiles
+      - allauth_static_volume:/usr/src/app/staticfiles/
 
-
-
-volumes:
-  static_volume:
