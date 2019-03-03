@@ -132,18 +132,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 # path to dir where all projects static files are stored
-static_path = os.getenv('DJANGO_STATIC', os.path.join(BASE_DIR, 'remote_static'))
+# static_path = os.getenv('DJANGO_STATIC', os.path.join(BASE_DIR, 'remote_static'))
 
 # path to dir where all projects media files are stored
-media_path = os.getenv('DJANGO_MEDIA', os.path.join(BASE_DIR, 'remote_media'))
+# media_path = os.getenv('DJANGO_MEDIA', os.path.join(BASE_DIR, 'remote_media'))
 
 # name of the directory for this particular site
-project_dir_name = 'all_auth_example'
+# project_dir_name = 'all_auth_example'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(static_path, project_dir_name)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-media_url = '/media/'
-MEDIA_ROOT = os.path.join(media_path, project_dir_name)
+MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(media_path, project_dir_name)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
 FILE_UPLOAD_PERMISSIONS = 0o644
 
