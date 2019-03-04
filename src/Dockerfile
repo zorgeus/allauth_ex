@@ -13,6 +13,8 @@ ENV DJANGO_MEDIA /usr/src/app/mediafiles
 # set work directory
 WORKDIR /usr/src/app
 
+RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
+
 # install dependencies
 RUN pip install --upgrade pip
 RUN pip install pipenv

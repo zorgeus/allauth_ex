@@ -15,15 +15,17 @@ services:
       - DJANGO_DEBUG=$DJANGO_DEBUG
       - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
       - DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS
-      - MYSQL_PORT=$MYSQL_PORT
-      - MYSQL_USER=$MYSQL_USER
-      - MYSQL_NAME=$MYSQL_NAME
-      - MYSQL_PWD=$MYSQL_PWD
+      - ELEPHANTSQL_PORT=$ELEPHANTSQL_PORT
+      - ELEPHANTSQL_USR=$ELEPHANTSQL_USR
+      - ELEPHANTSQL_DB=$ELEPHANTSQL_DB
+      - ELEPHANTSQL_PWD=$ELEPHANTSQL_PWD
     volumes:
       - ./src/:/usr/src/app/
       - allauth_static_volume:/usr/src/app/staticfiles/
     expose:
       - 8000
+    extra_hosts:
+      - "elephant:34.227.59.105"
   nginx:
     build: ./nginx
     ports:

@@ -77,23 +77,23 @@ WSGI_APPLICATION = 'allauth_test.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # DATABASES = {
     # 'default': {
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': os.getenv('MYSQL_NAME'),
-        # 'USER': os.getenv('MYSQL_USER'),
-        # 'HOST': 'db', # name of the service defined in docker-compose.yml
-        # 'PORT': os.getenv('MYSQL_PORT'),
-        # 'PASSWORD': os.getenv('MYSQL_PWD')
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('ELEPHANTSQL_DB'),
+        'USER': os.getenv('ELEPHANTSQL_USR'),
+        'HOST': 'elephant', # the name of an external host from the compose file
+        'PORT': os.getenv('ELEPHANTSQL_PORT'),
+        'PASSWORD': os.getenv('ELEPHANTSQL_PWD')
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
